@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+
+{% block content %}
+  <h2>Административная панель: Заявки</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Статус</th>
+        <th>Изменить статус</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for request in requests %}
+        <tr>
+          <td>{{ request.title }}</td>
+          <td>{{ request.description }}</td>
+          <td>{{ request.status }}</td>
+            <td>
+                <form method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input type="hidden" name="request_id" value="{{ request.id }}">
+                      <select name="new_status">
+                          <option value="new">Новая</option>
+                          <option value="process">В работе</option>
+                          <option value="made">Выполнено</option>
+                      </select>
+                      <input type="text" name="comment" placeholder="Комментарий">
+                      <input type="file" name="design_file">
+                      <button type="submit">Изменить статус</button>
+                </form>
+            </td>
+        </tr>
+      {% endfor %}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    </tbody>
+  </table>
+{% endblock %}

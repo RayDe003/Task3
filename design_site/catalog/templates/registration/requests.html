@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+  <h1>Главная страница</h1>
+  <h2>Последние выполненные заявки:</h2>
+  <ul>
+    {% for request in completed_requests %}
+      <li>
+        <p>Временная метка: {{ request.timestamp }}</p>
+        <p>Название: {{ request.title }}</p>
+        <p>Категория заявки: {{ request.category }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "home.html" %}
+
+{% block content %}
+    <h1>Заявки пользователя {{ user.username }}</h1>
+    <ul>
+        <form method="get">
+            <label for="status">Фильтр по статусу:</label>
+            <select id="status" name="status">
+                <option value="all">Все заявки</option>
+                <option value="new">Новые</option>
+                <option value="in process">В работе</option>
+                <option value="done">Выполненные</option>
+            </select>
+            <button type="submit">Применить</button>
+        </form>
+        {% for request in requests %}
+            <li>
+                <h3>{{ request.title }}</h3>
+                <p>Опсиание: {{ request.description }}</p>
+                <p>Статус: {{ request.status }}</p>
+                <p>Время создания: {{ request.date }}</p>
+                <p>Категория: {{ request.category }}</p>
+                <p>Фото: <img src="{{request.request_photo.url}}" alt="{{ request.title }}" width="250px" height="150px"/></p>
+
+                {% if request.comment %}
+                <p><b>Комментарий:</b> {{ request.comment }}</p>
+                {% endif %}
+
+                {% if request.design_file %}
+                    <p><b>Файл дизайна:</b> <img src="{{ request.design_file}}" alt="ne rabotaet(" width="250px" height="150px" /></p>
+                {% endif %}
+                <p><a href="{% url 'delete_request' request.id %}">Удалить</a></p>
+                <br>
+                <br>
+                </li>
+                {% empty %}
+                <li>Пользователь пока не создал заявок.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

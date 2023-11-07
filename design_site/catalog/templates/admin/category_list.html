@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список категорий</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Список категорий</h1>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{% url 'requests_by_category' category.id %}">{{ category.name }}</a>
+                <p><a href="{% url 'delete_category' category.id %}">Удалить</a></p>
+            </li>
+        {% endfor %}
+    </ul>
+     <hr>
+    <a href="{% url 'create_category'%}">Создать категорию</a>
+    <br>
+    <a href="{% url 'index' %}">На главную страницу</a>
+</body>
+</html>

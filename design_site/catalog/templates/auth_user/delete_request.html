@@ -1,0 +1,17 @@
+{% extends "home.html" %}
+
+{% block content %}
+     <h1>Вы уверены, что хотите удалить заявку "{{ request_to_delete.title }}"?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Удалить">
+    </form>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    <a href="{% url 'home' %}">Отмена</a>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявки в категории {{ category.name }}</title>
+</head>
+<body>
+    <h1>Заявки в категории "{{ category.name }}"</h1>
+    <ul>
+        {% for request in requests %}
+            <li>
+                <a href="{% url 'request_detail' request.id %}">{{ request.title }}</a> ({{ request.author }})
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'category_list' %}">Вернуться к списку категорий</a>
+</body>
+</html>

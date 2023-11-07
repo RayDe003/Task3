@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Удаление категории</title>
+</head>
+<body>
+    <h1>Вы уверены, что хотите удалить категорию "{{ category.name }}"?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Удалить">
+    </form>
+    <a href="{% url 'category_list' %}">Отмена</a>
+</body>
+</html>

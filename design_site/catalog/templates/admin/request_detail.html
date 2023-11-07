@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали заявки "{{ request.title }}"</title>
+</head>
+<body>
+    <h1>Детали заявки "{{ request.title }}"</h1>
+    <p><b>Название:</b> {{ request.title }}</p>
+    <p><b>Описание:</b> {{ request.description }}</p>
+    <p><b>Категория:</b> {{ request.category.name }}</p>
+    <p><b>Автор:</b> {{ request.user }}</p>
+    <p><b>Статус:</b> {{ request.status }}</p>
+    <p><b>Дата создания:</b> {{ request.date}}</p>
+    <strong>Фото:</strong><img src="{{request.request_photo}}" alt="ne rabotaet( ne stav'te -" width="250px" height="150px"/>
+    <br>
+
+    {% if request.comment %}
+        <p><b>Комментарий:</b> {{ request.comment }}</p>
+    {% endif %}
+
+    {% if request.design_file %}
+        <p><b>Файл дизайна:</b> <img src="{{ request.design_file}}" alt="ne rabotaet(" width="250px" height="150px" /></p>
+    {% endif %}
+    <br>
+    <a href="{% url 'category_list' %}">Вернуться к списку категорий</a>
+    <a href="{% url 'requests_by_category' request.category.id %}">Вернуться к заявкам в этой категории</a>
+</body>
+</html>
